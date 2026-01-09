@@ -1,0 +1,50 @@
+Java vs JavaScript
+
+Son Lenguajes de programación con un par de similitudes pero lo que los diferencias es que, Java es un lenguaje de programación Compilado.
+JavaScript es un lenguae de programación de interpretación.
+
+Compilado se refiere a que el codigo que se ejecute se tranformara a otra fichero hasta ser lenguaje de maquina y poder leer linea por linea
+Interpretado se refiere que el codigo lo ejecuta tal cual el usuario lo escriba, no necesita de un compilado ya que lee el codigo tal cual lo esta interpretando
+
+Otra de las grandes diferencias entre estos dos lenguajes es que JavaScript es un lenguaje con tipado debil y de tipado dinamico y Java fuertemente tipado y de tipado dinamico
+El tipado (debil/fuerte/dinamico) hace referencia a indicar el tipo de dato que tendran las variable, si es de tipado debil no es necesario colocar el tipo, si es de tipado fuerte es necesario hacerlo, si es dinamico, a medida que avance el codigo puedo cambiar el tipo de dato en cualquier momento de la variable.
+
+Utilización JavaScript
+
+Al dia de hoy JS se puede utilizar para crear diversidad de software, ya no solo web (que fue su principal pilar) si no, tambien aplicaciones de escritorio, paginas web, backend, machine learning.
+Este lenguaje tiene mucho soporte que al dia de hoy podemos crear diversas aplicaciones, software, paginas.
+
+Especificaciones ECAMScript
+
+La especificacion de ECMAScript basicamente es el nucleo de JS ya que de aqui surgio el lenguaje de programación, esta especificacion define la version de JS pero desde el 2015 ya solo son los años los cuales especifican la version del JS, por ejemplo, si 
+usamos un JS con ECMAScript 2020 esa es su version el año. Basado en este suceso hizo que los programadores no se preocuparan tanto por las versiones que usan en sus proyectos.
+
+
+Motor V8
+
+El motor v8 es el interprete encargado de ejecutar JS creado por Google
+
+Referencias para reforzar conocimientos
+
+Impacto: Stack Overflow | GitHub | Índice TIOBE | Google Trends
+0.-Historia
+0.-Especificación ECMAScript
+1.- Documentación Mozilla (apartado JS)
+2.- Documentación W3Schools (Docuemntación buena)
+3.- Documentación JS Info
+4.- Libro Eloquent JavaScript
+
+Buenas Practicas
+
+Guia de estilo de JavaScript el cual contiene las buenas practicas deseables para los programadores de este lenguaje.
+
+Kebab case : es una convención de nomenclatura en programación y desarrollo web donde las palabras se unen con guiones medios (-) y se escriben en minúsculas, como en nombre-de-archivo o mi-clase-css
+snake case : convención de nomenclatura se utiliza para escribir identificadores (como variables, funciones o nombres de archivos) donde cada palabra está separada por un guion bajo (_) y todas las letras están en minúsculas [1, 2]. 
+
+Normalmente en los ficheros de JS usan Kebab case y las snake case las usan normalmente en variables
+
+En JS moderno, ya no es necesario colocar punto y comas
+
+lowercamelcase: Primera palabra en minuscula y ldespues mayuscular, uso en variables
+ 
+Interpolar una variable: es la tecnica de incorporar una variable directamente en una cadena de texto
