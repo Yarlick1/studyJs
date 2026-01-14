@@ -48,3 +48,9 @@ En JS moderno, ya no es necesario colocar punto y comas
 lowercamelcase: Primera palabra en minuscula y ldespues mayuscular, uso en variables
  
 Interpolar una variable: es la tecnica de incorporar una variable directamente en una cadena de texto
+
+Estructuras de datos
+Existen estructuras de datos como los Arrays y los Set, son listas ordenadas pero tienen una gran diferencia la cual es que set no se maneja por indices. 
+Set nos puede arrojar valores booleanos.
+La principal diferencia entre los ARRAY y los SET es que los SET no admite dumplicados
+La estructura map es cuando quieras utilizar los datos para modificarlos
