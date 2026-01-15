@@ -6,8 +6,6 @@ let librosNuevos = ["Anatomía", "Virología", "Anatomía", "Pediatría", "Virol
 // Crea un Set para almacenar los títulos únicos (sin repeticiones) de esos libros.
 let titulosUnicos = new Set(librosNuevos)
 // Crea un Map llamado inventario donde la clave sea el nombre del libro y el valor sea la cantidad de copias disponibles (por ahora, todos empiezan con 5 copias).
-// let arrayTitulos = Array.from(titulosUnicos)
-
 let inventario = new Map([
     ])
 for (resultLibros of titulosUnicos){
@@ -24,7 +22,14 @@ for (resultLibros of titulosUnicos){
 // Crea un array llamado prestamos que contenga: "Anatomía", "Pediatría", "Anatomía", "Cirugía".
 let prestamos = ["Anatomía", "Pediatría", "Anatomía", "Cirugía"]
 // Recorre el array de prestamos con un bucle.
-
+for (valor of prestamos){
+    if(inventario.has(valor)){
+        inventario.set(valor , inventario.get(valor) -1)
+        console.log(inventario)
+    } else{
+        console.log(`El libro ${valor} no forma parte de la biblioteca`)
+    }
+}
 // Por cada libro en prestamos:
 
 // Si el libro existe en el inventario, resta 1 a su cantidad de copias.
@@ -33,9 +38,15 @@ let prestamos = ["Anatomía", "Pediatría", "Anatomía", "Cirugía"]
 
 // 3. Reporte Final (Acumulación)
 // Crea una variable totalLibrosEnEstante que empiece en 0.
-
+let totalLibrosEnEstante = 0
 // Recorre tu Map inventario.
-
+for (libros of inventario){
+    totalLibrosEnEstante += libros[1]
+}
 // Suma todas las copias restantes de todos los libros en la variable totalLibrosEnEstante.
+console.log(`Suma Total de copias restantes ${totalLibrosEnEstante}`)
 
 // Imprime el inventario final completo y el total de libros físicos que quedan en la biblioteca.
+console.log(`Este es el inventario final completo:`)
+console.log(inventario)
+console.log(`Y este es el total de libros físicos que quedan en la biblioteca: ${totalLibrosEnEstante}`)
