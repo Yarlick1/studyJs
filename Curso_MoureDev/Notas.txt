@@ -56,3 +56,5 @@ La principal diferencia entre los ARRAY y los SET es que los SET no admite dumpl
 La estructura map es cuando quieras utilizar los datos para modificarlos
 
 Estructuras de control (loops o bucles) se asocian a las estructuras de datos
+
+Objetos son una colección de propiedades, similares a los mapas a nivel estructura
