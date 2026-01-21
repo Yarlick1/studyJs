@@ -58,3 +58,5 @@ La estructura map es cuando quieras utilizar los datos para modificarlos
 Estructuras de control (loops o bucles) se asocian a las estructuras de datos
 
 Objetos son una colección de propiedades, similares a los mapas a nivel estructura
+
+Se usan las clases cuando vamos a crear multiples objetos con estructura similar y queremos reutilizar codigo
