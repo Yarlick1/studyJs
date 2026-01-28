@@ -174,43 +174,111 @@
 
 // EJERCICIO FINAL
 // Sistema de Estudiantes
-class Usuario {
-    constructor({nombre, email, rol="Estudiante"}){
-        this.nombre = nombre
-        this.email = email
-        this.rol = rol
-    }
-    presentarse(){
-        return `${this.nombre} - ${this.rol} - Email:${this.email}`
-    }
+// class Usuario {
+//     constructor({nombre, email, rol="Estudiante"}){
+//         this.nombre = nombre
+//         this.email = email
+//         this.rol = rol
+//     }
+//     presentarse(){
+//         return `${this.nombre} - ${this.rol} - Email:${this.email}`
+//     }
 
-}
-class Estudiante extends Usuario{
-    constructor({ notas = [], ...datosRestantes}){
-        super(datosRestantes)
-        this.notas = notas
-    }
+// }
+// class Estudiante extends Usuario{
+//     constructor({ notas = [], ...datosRestantes}){
+//         super(datosRestantes)
+//         this.notas = notas
+//     }
 
-    get promedio(){
-        let suma = 0
-        this.notas.forEach(numeros => {
-            suma += numeros    
-        });
-        let resultado = suma / this.notas.length
-        return resultado
-    }
-     presentarse(){
-        // Usamos super.presentarse() para no repetir código del padre
-        return `${super.presentarse()} - Promedio: ${this.promedio}`;
-    }
+//     get promedio(){
+//         let suma = 0
+//         this.notas.forEach(numeros => {
+//             suma += numeros    
+//         });
+//         let resultado = suma / this.notas.length
+//         return resultado
+//     }
+//      presentarse(){
+//         // Usamos super.presentarse() para no repetir código del padre
+//         return `${super.presentarse()} - Promedio: ${this.promedio}`;
+//     }
 
-}
-const datosAlumno = {
-    nombre: "Yael",
-    email: "yael@dev.com",
-    notas: [10, 9, 8],
-    ciudad: "Toluca", // Dato extra
-    intereses: ["JS", "React"] // Dato extra
-};
-let prueba = new Estudiante(datosAlumno)
-console.log(prueba.presentarse())
+// }
+// const datosAlumno = {
+//     nombre: "Yael",
+//     email: "yael@dev.com",
+//     notas: [10, 9, 8],
+//     ciudad: "Toluca", // Dato extra
+//     intereses: ["JS", "React"] // Dato extra
+// };
+// let prueba = new Estudiante(datosAlumno)
+// console.log(prueba.presentarse())
+
+//Practica para recordar
+// class Videojuego{
+//     constructor({titulo, precio, consola="PC"}){
+//         this.titulo = titulo
+//         this.precio = precio
+//         this.consola = consola
+//     }
+//     aplicarDescuento(porcentaje){
+//         let descuento = this.precio * porcentaje / 100
+//         let resultado = this.precio - descuento
+//         return resultado
+//     }
+// }
+
+// class JuegoDigital extends Videojuego{
+//     constructor({codigoDescarga, ...elementosAnteriores}){
+//         super(elementosAnteriores)
+//         this.codigoDescarga = codigoDescarga
+        
+//     }
+//     aplicarDescuento(porcentaje){
+//         return `${super.aplicarDescuento(porcentaje)}. Descuento digital aplicado al código: ${this.codigoDescarga}`
+//     }
+// }
+// const miJuego = new JuegoDigital({
+//     titulo: "Elden Ring",
+//     precio: 60,
+//     codigoDescarga: "ELDEN-777-X", // <--- De aquí sale
+//     consola: "PS5"
+// });
+
+// // console.log(miJuego.aplicarDescuento(10));
+
+// //Seugndo ejercicio de practica 
+// class PerfilPublico {
+//     constructor({username, biografia, seguidores=0}){
+//         this.username = username
+//         this.biografia = biografia
+//         this.seguidores = seguidores
+//     }
+//     mostrarInfo(){
+//         console.log(`Nombre del usuario: ${this.username}, biografia: ${this.biografia}`)
+//     }
+// }
+// class PerfilPrivado extends PerfilPublico{
+//     #email
+//     #password
+//     constructor({email, password, ...datosPublicos}){
+//         super(datosPublicos)
+//         this.#email = email
+//         this.#password = password
+//     }
+//     get verDatosSecretos(){
+//         super.mostrarInfo()
+//         console.log(`su correo es ${this.#email}`)
+//     }
+
+// }
+// let prueba = new PerfilPrivado({
+//     username: "Yarlick",
+//     biografia: "Soy programador",
+//     seguidores: 500,
+//     email: "yael@gmail.com",
+//     password: 123
+// })
+
+// prueba.verDatosSecretos
