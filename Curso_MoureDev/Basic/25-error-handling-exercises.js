@@ -500,8 +500,6 @@ Vídeo: https://youtu.be/1glVfFxj8a4?t=20392
 //                 bddinfo.usuariosRegistrados.push(element)
 //                 console.log(`✅, Usuario ${element.nombre} Registrado`)
 
-
-
 //             } catch (e) {
 //                 // Captura individual para que el bucle siga
 //                 if (e instanceof TypeError) console.error("‼️ Error de Tipo:", e.message);
@@ -517,71 +515,156 @@ Vídeo: https://youtu.be/1glVfFxj8a4?t=20392
 // };
 // importador(BD, nuevosUsuarios);
 
-
 // 🧪 El Laboratorio Químico: "Protocolo de Seguridad"
-const Laboratorio = {
-    catalogoLegal: ["Oxígeno", "Nitrógeno", "Helio", "Hidrógeno"],
-    limiteSeguridad: 100, // No se pueden mezclar más de 100ml en total
-    mezclasExitosas: 0,
-    abrirSilo: () => console.log("🏗️ Silo de sustancias abierto..."),
-    cerrarSilo: () => console.log("🔒 Silo de sustancias cerrado.")
-};
+// const Laboratorio = {
+//     catalogoLegal: ["Oxígeno", "Nitrógeno", "Helio", "Hidrógeno"],
+//     limiteSeguridad: 100, // No se pueden mezclar más de 100ml en total
+//     mezclasExitosas: 0,
+//     abrirSilo: () => console.log("🏗️ Silo de sustancias abierto..."),
+//     cerrarSilo: () => console.log("🔒 Silo de sustancias cerrado.")
+// };
 
-const recetasRecibidas = [
-    { id: "R1", nombre: "Mezcla Aire", componentes: ["Oxígeno", "Nitrógeno"], cantidades: [20, 30] },
-    { id: "R2", nombre: "Mezcla Volátil", componentes: ["Hidrógeno", "Plutonio"], cantidades: [10, 5] }, // Plutonio no es legal
-    { id: "R3", nombre: "Mezcla Pesada", componentes: ["Oxígeno", "Helio"], cantidades: [60, 50] }, // Suma 110 (Inestable)
-    { id: "R4", nombre: "Mezcla Pura", componentes: ["Helio"], cantidades: [15] }
-];
-class SustanciaProhibidaError extends Error {
-    constructor(message) {
-        super(message)
-    }
-}
+// const recetasRecibidas = [
+//     { id: "R1", nombre: "Mezcla Aire", componentes: ["Oxígeno", "Nitrógeno"], cantidades: [20, 30] },
+//     { id: "R2", nombre: "Mezcla Volátil", componentes: ["Hidrógeno", "Plutonio"], cantidades: [10, 5] }, // Plutonio no es legal
+//     { id: "R3", nombre: "Mezcla Pesada", componentes: ["Oxígeno", "Helio"], cantidades: [60, 50] }, // Suma 110 (Inestable)
+//     { id: "R4", nombre: "Mezcla Pura", componentes: ["Helio"], cantidades: [15] }
+// ];
+// class SustanciaProhibidaError extends Error {
+//     constructor(message) {
+//         super(message)
+//     }
+// }
 
-class ReaccionInestableError extends Error {
-    constructor(message) {
-        super(message)
-    }
-}
-let procesarRecetas = (datosLab, recetas) => {
-    // console.log(datosLab)
-    datosLab.abrirSilo()
+// class ReaccionInestableError extends Error {
+//     constructor(message) {
+//         super(message)
+//     }
+// }
+// let procesarRecetas = (datosLab, recetas) => {
+//     // console.log(datosLab)
+//     datosLab.abrirSilo()
 
-    try{
+//     try{
 
-    recetas.forEach(receta => {
-        try {
-            console.log(`Revisión de la receta ${receta.id}`)
-            receta.componentes.forEach(sustancia => {
-                if (!(datosLab.catalogoLegal.includes(sustancia))) {
-                    throw new SustanciaProhibidaError("Sustancia prohibida")
-                }
-            })
-            // Bucle para sumar las cantidades de cada receta
-            let resultado = 0
-            receta.cantidades.forEach(cantidad =>{
-                resultado += cantidad        
-            })
-            //Validamos si las cantidades no superan lo establecido
-            if (resultado > datosLab.limiteSeguridad) {
-                throw new ReaccionInestableError(`Reacción inestable en ${receta.id}`)
-            } 
-            datosLab.mezclasExitosas += 1
-            console.log(`Receta Exitosa ${receta.id}`)
-        } catch (e) {
-            if (e instanceof SustanciaProhibidaError) {
-                console.error("⚠️:", e.message)
-            } else if(e instanceof ReaccionInestableError){
-                console.error("ADVERTENCIA:",e.message)
-            }
-        }
-    })
-    } finally {
-        datosLab.cerrarSilo(); 
-        console.log("Total de recetas con Mezcla Exitosa", datosLab.mezclasExitosas)
-    }
-    
+//     recetas.forEach(receta => {
+//         try {
+//             console.log(`Revisión de la receta ${receta.id}`)
+//             receta.componentes.forEach(sustancia => {
+//                 if (!(datosLab.catalogoLegal.includes(sustancia))) {
+//                     throw new SustanciaProhibidaError("Sustancia prohibida")
+//                 }
+//             })
+//             // Bucle para sumar las cantidades de cada receta
+//             let resultado = 0
+//             receta.cantidades.forEach(cantidad =>{
+//                 resultado += cantidad
+//             })
+//             //Validamos si las cantidades no superan lo establecido
+//             if (resultado > datosLab.limiteSeguridad) {
+//                 throw new ReaccionInestableError(`Reacción inestable en ${receta.id}`)
+//             }
+//             datosLab.mezclasExitosas += 1
+//             console.log(`Receta Exitosa ${receta.id}`)
+//         } catch (e) {
+//             if (e instanceof SustanciaProhibidaError) {
+//                 console.error("⚠️:", e.message)
+//             } else if(e instanceof ReaccionInestableError){
+//                 console.error("ADVERTENCIA:",e.message)
+//             }
+//         }
+//     })
+//     } finally {
+//         datosLab.cerrarSilo();
+//         console.log("Total de recetas con Mezcla Exitosa", datosLab.mezclasExitosas)
+//     }
 
-}
-procesarRecetas(Laboratorio, recetasRecibidas)
+// }
+// procesarRecetas(Laboratorio, recetasRecibidas)
+
+// 🛒 Ejercicio 1: El Validador de Carrito de Compras
+// const carrito = {
+//   productos: [
+//     { nombre: "Teclado", precio: 50 },
+//     { nombre: "Mouse", precio: 25 },
+//   ],
+//   cupon: "DESC10",
+// };
+
+// class CupónInvalidoError extends Error{
+//     constructor(message){
+//         super(message)
+//     }
+// }
+
+// let calcularTotal =(cart) =>{
+//     if ("cupon" in cart) {
+//         if (!(cart.cupon === "DESC10" || cart.cupon === "DESC20") ) {
+//             throw new CupónInvalidoError("Cupon invalido")
+//         }
+//     }
+//     if (!("productos" in cart) || cart.productos.length === 0) {
+//         throw new Error("El carrito esta vacio");
+//     }
+//     let totalVenta = 0
+//     cart.productos.forEach(producto =>{
+//         totalVenta += producto.precio
+//     })
+//     if (cart.cupon === "DESC10") {
+//         let descuento = totalVenta * 0.10
+//         totalVenta -= descuento
+//     } else if(cart.cupon === "DESC20"){
+//         let descuento = totalVenta * 0.20
+//         totalVenta -= descuento
+//     }
+//     console.log(`Con su cupon del: ${cart.cupon.slice(-2)}% su total es de: $${totalVenta}`)
+// }
+// try{
+//     calcularTotal(carrito)
+
+// } catch (e){
+//     if (e instanceof CupónInvalidoError) {
+//         console.log("ERROR:",e.message)
+//     } else{
+//         console.log("E:",e.message)
+//     }
+// }
+
+// Ejercicio 2: El Procesador de Galería de Fotos (Anidado Pro)
+// const albumes = [
+//     { id: 1, fotos: ["vacaciones.jpg", "fiesta.png"] },
+//     { id: 2, fotos: null }, // ¡Error potencial!
+//     { id: 3, fotos: ["trabajo.pdf", "perfil.jpg"] } // PDF no es imagen
+// ];
+// let albumFotos =(album) =>{
+//     try{
+//         console.log("Revision de albumes......")
+
+//     album.forEach(elemento =>{
+//         try{
+//         console.log(elemento)
+//         if(elemento.fotos == null || !Array.isArray(elemento.fotos)){
+//             throw new Error("Album Corrupto")
+//         }
+//         elemento.fotos.forEach(extension =>{
+//             if(!(extension.slice(-4) === ".jpg" || extension.slice(-4) === ".png") ){
+//                 throw new TypeError("Formato no soportado")
+//             }
+//         })
+//         } catch(error){
+//             if (error instanceof TypeError) {
+//                 console.log("⚠️:",error.message)
+//             } else {
+//                 console.log("⚠️:",error.message)
+//             }
+//         } finally {
+//             console.log(`Álbum ${elemento.id} finalizado`)
+//         }
+//     })
+//     }finally{
+//         console.log("Revisión Finalizada 🗂️")
+//     }
+
+// }
+
+// albumFotos(albumes)
