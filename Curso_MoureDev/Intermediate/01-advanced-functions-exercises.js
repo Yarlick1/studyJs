@@ -586,5 +586,238 @@ Vídeo: https://youtu.be/iJvLAZ8MJ2E?t=4112
 // }
 // console.log(sumarHasta(2))
 
-// 1. Reto de Recursividad: "El Explorador de Profundidades"
+// 1. Calentamiento: Callback
+// let operar = (a, b, operacion) => operacion(a, b);
 
+// console.log(operar(2, 2, (a, b) => a + b));
+// console.log(operar(2, 5, (a, b) => a * b));
+
+// 2. El Calentamiento: Recursividad (Básico)
+
+// function repetirPalabra(palabra, veces) {
+//     if (veces == 0) {
+//         return "FIN";
+//     }
+//     console.log(palabra)
+//     return repetirPalabra(palabra, veces - 1);
+// }
+// console.log(repetirPalabra("Hola", 3));
+
+// A. Callbacks con condicionales
+// function evaluar(n, callback) {
+//     if (callback(n)) {
+//         return `El número ${n} pasó la prueba`;
+//     } else {
+//         return `El número ${n} fallo`;
+//     }
+// }
+
+// console.log(evaluar(5, (n) => n > 10))
+
+// B. Recursividad con acumulación
+// function cuentaRegresivoString(n) {
+//     if (n == 0) {
+//         return `¡Despegue!`;
+//     }
+//     return n + "..." + cuentaRegresivoString(n - 1);
+// }
+// console.log(cuentaRegresivoString(5))
+
+// 1. Recursividad: El "Aplanador" de Arrays (Intermedio)
+// let numeros = [1, [2, [3, 4]], 5];
+
+// function aplanar(lista) {
+//     let nuevaLista = [];
+//     for (numero of lista) {
+//         if (Array.isArray(numero)) {
+//             let resultado = aplanar(numero);
+//             nuevaLista.push(...resultado)
+
+//         } else {
+//             nuevaLista.push(numero);
+//         }
+//     }
+//     return nuevaLista;
+// }
+
+// console.log(aplanar(numeros));
+// console.log(aplanar(numeros));
+// console.log(aplanar(numeros));
+
+// 2. Callbacks: El "Procesador de Texto" (Intermedio)
+// function limpiarTexto(frase, callback) {
+//     return callback(frase);
+// }
+// console.log(limpiarTexto("   Hola Yael", (frase) => frase.trim()))
+// console.log(limpiarTexto("Hola Yael", (frase) => frase.toUpperCase()))
+// console.log(limpiarTexto("Hola Yael", (frase) => frase.replaceAll("a", "@")))
+
+// El Motor de Búsqueda Inteligente".
+
+// La Base de Datos de una Empresa
+// const empresa = {
+//     nombre: "Sede Central",
+//     empleados: ["Ana", "Pedro"],
+//     subDepartamentos: [
+//         {
+//             nombre: "Tecnología",
+//             empleados: ["Anabel", "Moure"],
+//             subDepartamentos: [
+//                 {
+//                     nombre: "IA",
+//                     empleados: ["Gemini", "ChatGPT"],
+//                     subDepartamentos: []
+//                 }
+//             ]
+//         },
+//         {
+//             nombre: "Ventas",
+//             empleados: ["Lucía"],
+//             subDepartamentos: []
+//         }
+//     ]
+// };
+
+// function buscarEmpleadoos(departamento, filtro) {
+//     let resultados = [];
+//     for (empleado of departamento.empleados) {
+//         let encontro = filtro(empleado)
+//         if (encontro) {
+//             resultados.push(encontro)
+//         }
+//     }
+
+
+//     for (sub of departamento.subDepartamentos) {
+//         let encontradosEnSub = buscarEmpleadoos(sub, filtro)
+//         resultados.push(...encontradosEnSub)
+//     }
+//     return resultados
+// }
+
+// function buscar(empleado) {
+//     if (empleado[0].includes("A")) {
+//         return empleado
+//     }
+// }
+
+
+// console.log(buscarEmpleadoos(empresa, buscar))
+
+// El Reto: "La Mudanza de Libros"
+// const estante = ["Don Quijote", ["El Principito", "Rayuela", ["Prueba", "Prueba", ["Prueba"]]], "Hamlet"];
+
+// function empacar(lista) {
+//     let mochila = [];
+
+//     for (libro of lista) {
+//         if (Array.isArray(libro)) {
+//             let nuevo = empacar(libro)
+//             mochila.push(...nuevo)
+//         } else {
+//             mochila.push(libro)
+//         }
+//     }
+//     return mochila;
+// }
+
+// console.log(empacar(estante))
+
+/*
+Clase 12 - Funciones avanzadas
+Vídeo: https://youtu.be/iJvLAZ8MJ2E?t=4112
+*/
+
+// 1. Crea una función que retorne a otra función
+function devuelta() {
+    return function () {
+        console.log("devuelve una nueva funcion")
+    }
+}
+
+// let vuelta = devuelta()
+// vuelta()
+// 2. Implementa una función currificada que multiplique 3 números
+function currificada(a) {
+    return function (b) {
+        return function (c) {
+            return a * b * c;
+        }
+    }
+}
+// console.log(currificada(2)(2)(2))
+// 3. Desarrolla una función recursiva que calcule la potencia de un número elevado a un exponente
+function potencia(num, pot) {
+    if (pot === 0) {
+        return 1;
+    }
+    console.log(num)
+    return num * potencia(num, pot - 1);
+}
+// console.log(potencia(2, 3))
+// 4. Crea una función createCounter() que reciba un valor inicial y retorne un objeto con métodos para increment(), decrement() y getValue(), utilizando un closure para mantener el estado
+function createCounter(valorInicial, cambia) {
+    let valor = valorInicial;
+
+    return {
+        increment: () => {
+            valor++
+            cambia(valor)
+        },
+        decrement: () => {
+            valor--
+            cambia(valor)
+        },
+        getValue: () => `El valor es :${valor}`
+    };
+}
+let inicia = createCounter(5, (valorNuevo) => console.log("el valor cambio ha", valorNuevo));
+inicia.increment();
+inicia.increment();
+inicia.decrement();
+console.log(inicia.getValue());
+
+// 5. Crea una función sumManyTimes(multiplier, ...numbers) que primero sume todos los números (usando parámetros Rest) y luego multiplique el resultado por multiplier
+// function sumManyTimes(multiplier, ...numbers) {
+//     let suma = 0;
+//     for (numero of numbers) {
+//         numero.forEach(element => {
+//             suma += element;
+//         });
+//     }
+//     return suma * multiplier
+// }
+// console.log(sumManyTimes(5, [1, 2, 3]))
+// 6. Crea un Callback que se invoque con el resultado de la suma de todos los números que se le pasan a una función
+// function suma(a, b, callback) {
+//     return callback(a, b);
+// }
+// console.log(suma(2, 2, (a, b) => a + b))
+// 7. Desarrolla una función parcial
+// function parcial(nombre) {
+//     return function (gustos, hobby) {
+//         return `A ${nombre} le gusta: ${gustos} y su hobby es: ${hobby}`;
+//     }
+// }
+// let persona = parcial("Yael");
+// console.log(persona("programar", "jugar videojuegos"))
+// 8. Implementa un ejemplo que haga uso de Spread
+// function suma(a, b, c) {
+//     return a + b + c;
+// }
+// let n = [1, 2, 3];
+// console.log(suma(...n))
+// 9. Implementa un retorno implícito
+let saludo = () => `Hola!`;
+// console.log(saludo())
+// 10. Haz uso del this léxico
+let objeto = {
+    nombre: "Yael",
+    caminar: function () {
+        console.log(`${this.nombre} camina`)
+    },
+    corre: () => { console.log(`${this.nombre} corre`) } //esa no se muestra el nombre de nuestro objecto ya que toma el contexto global osea afuera de nuestro objeto y como no tenemos una variable con nombre fuera de, nos arroja como resultado undefined
+}
+
+// objeto.caminar()
+// objeto.corre()
