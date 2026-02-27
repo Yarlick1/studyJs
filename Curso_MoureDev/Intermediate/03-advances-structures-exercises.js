@@ -424,8 +424,52 @@ datosDepuradosParaUsar.forEach(usuario => mapLikes.set(usuario.user, (mapLikes.g
 let usuarioLikes = Array.from(mapLikes);//Así solo tengo un array con los usuarios con todos sus likes sumados
 let influencers = usuarioLikes.filter(usuario => usuario[1] > 200).map(usuario => usuario[0]);
 
-console.log("Usuarios que tiene más de 200 likes", influencers)
+// console.log("Usuarios que tiene más de 200 likes", influencers)
 
 //verificación si alguna publicación tiene una letra a
 let verificacionTags = datosDepuradosParaUsar.some(post => post.tags.includes("ia"));
-console.log(verificacionTags)
+// console.log(verificacionTags)
+
+
+let solucion = (entrada) => {
+    if (!entrada) return [];
+
+    const resultado = [];
+    let caracterActual = entrada[0];
+    let conteo = 0;//1
+
+    for (const char of entrada) {
+        if (char === caracterActual) {
+            conteo++
+        } else {
+            resultado.push([caracterActual, conteo]);
+
+            caracterActual = char;
+            conteo = 1
+        }
+    }
+
+    resultado.push([caracterActual, conteo]);
+
+    return resultado;
+
+}
+
+// console.log(solucion("aaaabbbcca"));
+
+// El Escenario: "El Club de Lectura"
+const biblioteca = [
+    { id: 1, titulo: "JavaScript Pro", cat: "Programación", puntos: 10 },
+    { id: 2, titulo: "Clean Code", cat: "Programación", puntos: 8 },
+    { id: 1, titulo: "JavaScript Pro", cat: "Programación", puntos: 10 }, // REPETIDO
+    { id: 3, titulo: "Hábitos Atómicos", cat: "Personal", puntos: 10 }
+];
+
+let bibliotecaLimpia = new Map();
+
+biblioteca.forEach(libro => bibliotecaLimpia.set(libro.id, libro))
+
+let bibliotecaL = Array.from(bibliotecaLimpia.values());
+
+let librosProgramacion = bibliotecaL.filter(libro => libro.cat === "Programación").reduce((acumulador, libroActual) => acumulador + libroActual.puntos, 0);
+console.log(librosProgramacion)
