@@ -2,7 +2,9 @@
 
 //- Prototipos y Herencia
 
-// - Prototipos: Es un mecanismo por el cual los objetos puedas heredar los metodos o propiedades
+// - Prototipos: Es un mecanismo por el cual los objetos puedas heredar los metodos o propiedades de otros objetos (a dia de hoy no es tan habitual)
+// el prototipo es la base o propiedades o funciones de un objetos
+//El prototipo es algo interno, no es algo que se puede acceder
 
 let person = {
     name: "Yael",
@@ -12,7 +14,7 @@ let person = {
     }
 }
 
-// console.log(person.__proto__);
+// console.log(person.__proto__); 
 // console.log(Object.getPrototypeOf(person));
 
 person.sayAge = function () {
@@ -21,8 +23,9 @@ person.sayAge = function () {
 
 // person.sayAge()
 
-// Herencia: esta herencia es una forma que usaban antes de usar clases, heredamos las propiedades y metodos de un obj base, pero si queremos actualizar alguna de ellas del obj base no se podra a menos que solo sea al nuevo objeto
-
+// Herencia basada en prototipo: esta herencia es una forma que usaban antes de usar clases, heredamos las propiedades y metodos de un obj base, pero si queremos actualizar alguna de ellas del obj base no se podra a menos que solo sea al nuevo objeto
+// en la herencia podemos acceder a todas las propiedades o funciones que tiene el objeto que hereda
+// se usaba antes de usar la hererncia de clases antes de que se implementara ecmascript6
 
 let programmer = Object.create(person);
 programmer.language = "JavaScript";
@@ -54,10 +57,10 @@ new_person.greet2()
 let person_core = { name: "Ulrick" }
 let person_details = { age: 24, alias: "Yarlick" }
 
-let fullPerosn = Object.assign(person_core, person_details);
+let fullPerosn = Object.assign(person_core, person_details); // Combina 2 oobjetos creando un unico objeto
 console.log(fullPerosn)
 
-// keys, values, entries
+// keys, values, entries: obtenemos una lista de llaves, valores o pares de valores y llaves
 
 console.log(Object.keys(fullPerosn))
 console.log(Object.values(fullPerosn))

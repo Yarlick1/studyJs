@@ -1,5 +1,5 @@
 // Clases avanzadas
-
+//Esto es lo que debemos usar a menos que nos encontremos las maneras antiguas, nos basamos en los objetos avanzados
 class Person {
     constructor(name, age) {
         this.name = name;
@@ -42,7 +42,7 @@ class Animal {
 // let animal = new Animal("Ya");
 // console.log(animal)
 
-// - Polimorfismo: capacidad de las clsases abstractas para implementar metodos con comparmientos diferentes
+// - Polimorfismo: capacidad de las clsases abstractas para implementar metodos con comparmientos diferentes, heredan su constructor base 
 
 class Cat extends Animal {
     makeSound() {
@@ -64,7 +64,7 @@ const dog = new Dog("Sol")
 console.log(dog)
 dog.makeSound()
 
-// - Mixins: Técnica para compartir funcionalidad en diferentes clases pero sin utilizar herencia
+// - Mixins: Técnica para compartir funcionalidad en diferentes clases pero sin utilizar herencia. No se suele ver en otros lenguajes (al ser un tipaedo debil o dinamico nos permite ahcer un monton de cosas)
 
 const FlyMixixn = {
     fly() {
