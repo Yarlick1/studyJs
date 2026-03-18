@@ -17,7 +17,7 @@ console.log("Fin")
 // - Task Queue (Cola de tareas) y MicrotaskQueue - Se almacenan las funciones cuando el CallStack este vacio
 
 //Flujo del Event Loop:
-//1. Call Stack
+// 1. Call Stack
 // 2. Operaciones asincronas -> Web APIs o Node.js
 // 3. Operación termina -> La coloca en Task Queue o Microstack Queue
 // 4. Si Call Stack vacío -> Mueve tareas del Microtask Queue o Task Queue al Call Stack
@@ -26,7 +26,7 @@ console.log("Fin")
 //Código asincrono
 
 // - Callbacks - Recordando es una funcion que se pasa como argumento a otra función y se ejecuta cuando la otra a finalizado
-
+// Fue el primer mecanismo que se usaba para palicar asincronia.
 console.log("INICIO");
 
 setTimeout(() => {
@@ -72,9 +72,9 @@ const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
         const ok = false;
         if (ok) {
-            console.log("Operación exítosa");
+            resolve("Operación exítosa");
         } else {
-            console.log("Se ha producido un error");
+            reject("Se ha producido un error");
         }
     }, 4000);
 })
@@ -119,8 +119,8 @@ function step3Promise() {
 }
 
 step1Promise()
-    .then(step2Promise())
-    .then(step3Promise())
+    .then(() => step2Promise())
+    .then(() => step3Promise())
     .then(() => {
         console.log("Todos los paso con promesas completados")
     });

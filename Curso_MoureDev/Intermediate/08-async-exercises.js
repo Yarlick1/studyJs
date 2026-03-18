@@ -107,8 +107,8 @@ function thirdTask() {
 }
 
 // firstTask()
-//     .then(secondTask())
-//     .then(thirdTask())
+//     .then(() => secondTask())
+//     .then(() => thirdTask())
 //     .then(() => { console.log("Tareas completadas") })
 
 // 5. Transforma el ejercicio anterior de Promesas en una función async/await llamada executeTasks().
@@ -134,33 +134,79 @@ async function executeTasks() {
 //    Si el id es 5 o mayor, la promesa se rechaza con el mensaje "Usuario no encontrado".
 //    Usa async/await para llamar a getUser(id) y maneja los errores con try/catch.
 
-function getUser(id) {
-    return new Promise((resolve, reject) => setTimeout(() => {
-        if (id < 5) {
-            resolve();
-        } else {
-            reject();
-        }
-    }, 2000));
+function simular(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function userId(id) {
-    await getUser(id);
+async function getUser(id) {
+    await simular(2000);
+    if (id < 5) return { id, nombre: "Usuario" + id };
+    throw "Usuario no encontrado";
 }
 
-console.log(userId(1).then(() => "Prueba"))
+// getUser(10).then(resolve => {
+//     console.log(resolve)
+// }).catch(error => {
+//     console.log(error)
+// })
 
 // 7. Intenta predecir el resultado de este código antes de ejecutarlo en la consola:
-//    console.log("Inicio")
-//    setTimeout(() => console.log("setTimeout ejecutado"), 0)
-//    Promise.resolve().then(() => console.log("Promesa resuelta"))
-//    console.log("Fin")
+// console.log("Inicio")
+// setTimeout(() => console.log("setTimeout ejecutado"), 0)
+// Promise.resolve().then(() => console.log("Promesa resuelta"))
+// console.log("Fin")
+
+//Respuesta del ejercicio 7 = Se muestra primero el los log sincronos, luego la promesa y por ultimo el setTimeout
 
 // 8. Crea tres funciones que devuelvan promesas con tiempos de espera distintos.
 //    A continuación, usa Promise.all() para ejecutarlas todas al mismo tiempo y mostrar "Todas las promesas resueltas" cuando terminen.
 
+function promise1() {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve("Primera promesa");
+        }, 5000);
+    })
+}
+
+function promise2() {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve("Segunda promesa");
+        }, 2000);
+    })
+}
+
+function promise3() {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve("Tercera promesa");
+        }, 3000);
+    })
+}
+
+// Promise.all([promise1(), promise2(), promise3()])
+//     .then(resolve => {
+//         console.log(resolve);
+//     }).catch(error => {
+//         console.log(error)
+//     });
+
 // 9. Crea una función waitSeconds(segundos) que use setTimeout dentro de una Promesa para esperar la cantidad de segundos indicada.
 //    A continuación, usa async/await para que se espere 3 segundos antes de mostrar "Tiempo finalizado" en consola.
+
+function waitSeconds(segundos) {
+    return new Promise(resolve => setTimeout(resolve, segundos));
+}
+
+async function time() {
+    console.log("Empieza el tiempo")
+    await waitSeconds(3000);
+
+    console.log("Tiempo finalizado")
+}
+
+// time();
 
 // 10. Crea una simulación de un cajero automático usando asincronía.
 //     - La función checkBalance() tarda 1s y devuelve un saldo de 500$.
@@ -173,3 +219,314 @@ console.log(userId(1).then(() => "Prueba"))
 //     Operación exitosa, saldo restante: 200$
 //     Retirando 300$...
 //     Error: Fondos insuficientes
+
+let saldo = 500;
+
+function waitTransaccion(segundos) {
+    return new Promise(resolve => setTimeout(resolve, segundos));
+}
+
+async function checkBalance() {
+    await waitTransaccion(1000);
+    console.log(`Saldo disponible: $${saldo}`)
+}
+
+async function withdrawMoney(amount) {
+    await waitTransaccion(2000);
+    console.log(`Retirando...$${amount}`);
+    if (saldo >= amount) {
+        saldo -= amount;
+        console.log(`Operación exitosa. Retiraste $${amount}. Saldo restante: $${saldo}`);
+    } else {
+        console.log(`Error: Fondos insuficientes`);
+    }
+}
+
+async function iniciarCajero() {
+    await checkBalance();
+    await withdrawMoney(300);
+    await withdrawMoney(300);
+}
+
+// iniciarCajero();
+
+// EJERCICIOS EXTRAS
+
+// El Escenario: "El Sistema de Envío de Emails"
+function waitEmail(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function enviarEmail(usuario) {
+    await waitEmail((Math.floor(Math.random() * 3) + 1) * 1000);
+
+    if (usuario === "Error") {
+        throw new Error("Error");
+    } else {
+        console.log(`Email enviado a ${usuario}`);
+    }
+}
+
+let usuarios = ["Yael", "Error", "Zulmara"];
+
+async function envio() {
+    for (user of usuarios) {
+        try {
+            await enviarEmail(user)
+        } catch (e) {
+            console.log(e.message);
+        }
+    }
+}
+
+// envio();
+
+// El Escenario: "El Almacén de Logística"
+
+function waitVerificar(segundos) {
+    return new Promise(resolve => setTimeout(resolve, segundos));
+}
+
+async function verificarStock(producto) {
+    await waitVerificar(1500);
+    if (producto === "iPhone") {
+        console.log("se resuelve")
+    } else {
+        throw new Error("Producto agotado");
+    }
+}
+
+async function procesarPago(monto) {
+    await waitVerificar(2000);
+    if (monto > 0) {
+        return `Pago de $${monto} recibido`;
+    } else {
+        throw new Error("Monto Invalido");
+    }
+}
+
+async function calcularEnvio(ciudad) {
+    await waitVerificar(1000);
+    return `Costo de envio para ${ciudad}: $10`;
+}
+
+let pedido1 = {
+    articulo: "iPhone", precio: 50, ciudad: "CDMX"
+}
+
+async function logistica(pedido) {
+    try {
+        console.log("--- Iniciando proceso de logística ---");
+
+        // 1. Bloqueo secuencial: Si falla, saltamos al catch inmediatamente
+        await verificarStock(pedido.articulo);
+
+        // 2. Ejecución paralela: Esperamos a que ambas terminen antes de seguir
+        console.log("Stock verificado. Procesando pago y envío en paralelo...");
+        const resultados = await Promise.all([
+            procesarPago(pedido.precio),
+            calcularEnvio(pedido.ciudad)
+        ]);
+
+        // Si llegamos aquí, todo salió bien
+        console.log("✅ Pedido completado con éxito.", resultados);
+
+    } catch (e) {
+        console.log(`❌ Pedido cancelado: ${e.message}`);
+    }
+}
+
+// logistica(pedido1)
+
+
+// El Escenario: "El Gestor de Perfiles (ProfileManager)"
+
+function time(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function fetchUserData(id) {
+    console.log("....Iniciando")
+    await time(2000);
+
+    if (id === 1) {
+        return { id: 1, nombre: "Yael", tipo: "Admin" };
+    } else {
+        throw new Error("Usuario no encontrado");
+    }
+}
+
+
+//Clase core (sinfleton + Privacidad)
+let DATOS_SENSIBLE = Symbol("Datos_Sensibles");
+
+class ProfileManager {
+    constructor() {
+        if (ProfileManager.instance) {
+            return ProfileManager.instance;
+        }
+        this[DATOS_SENSIBLE];
+        ProfileManager.instance = this;
+    }
+
+    async inicializarPerfil(id) {
+        this[DATOS_SENSIBLE] = await fetchUserData(id);
+
+        console.log(`✅ Perfil de ${this[DATOS_SENSIBLE].nombre} cargado y protegido`)
+
+    }
+}
+
+let manejador = {
+    get: function (target, property) {
+        if (property === DATOS_SENSIBLE) {
+            return "Acceso Restringido";
+        }
+
+        const value = target[property];
+        // Si lo que piden es una función, hay que asegurar que "this" siga siendo el manager
+        if (typeof value === "function") {
+            return value.bind(target);
+        }
+
+        return value;
+    }
+}
+
+async function ejecutarPruebas() {
+    const managerReal = new ProfileManager();
+    const managerProtegido = new Proxy(managerReal, manejador);
+
+    console.log("Intentando hackear Symbol: ", managerProtegido[DATOS_SENSIBLE]);
+
+    try {
+        await managerProtegido.inicializarPerfil(1)
+        await managerProtegido.inicializarPerfil(99);
+    } catch (error) {
+        console.log("Error gestionado:", error.message);
+    }
+}
+
+// ejecutarPruebas()
+
+// Reto de Refuerzo: "El Validador de Mensajes"
+
+class Buzon {
+    async enviar(mensaje) {
+        await (new Promise(resolve => setTimeout(resolve, 1000)));
+
+        if (!mensaje) {
+            throw new Error("Mensaje Vacio");
+        }
+    }
+}
+
+let manejador2 = {
+    get: function (target, property) {
+        if (typeof target[property] === "function") {
+            return target[property].bind(target)
+        }
+        return target[property];
+    }
+}
+
+async function pruebas() {
+    const prueba = new Buzon();
+    const pruebaProtegida = new Proxy(prueba, manejador2);
+    try {
+        await pruebaProtegida.enviar()
+    } catch (error) {
+        console.log("Error:", error.message)
+    }
+}
+
+
+// pruebas()
+
+
+// "Bank of Gemini Core"
+
+// 1.-Motor Asíncrono
+async function validarTransaccion(monto) {
+    console.log("Validando Transacción......")
+    await (new Promise(resolve => setTimeout(resolve, 1500)));
+
+    if (monto > 10000) {
+        throw new Error("Requiere autorización manual para montos altos");
+    } else {
+        console.log("Transacción validada......")
+        return monto;
+    }
+
+}
+
+let SALDO_INTERNO = Symbol("Saldo_interno");
+
+class Banco {
+    constructor() {
+        if (Banco.instance) {
+            return Banco.instance;
+        }
+        this[SALDO_INTERNO] = 5000;
+        Banco.instance = this;
+    }
+
+    async depositar(cantidad) {
+        console.log("Iniciando Transacción......")
+        let cantidadDeposito = await validarTransaccion(cantidad);
+        this[SALDO_INTERNO] += cantidadDeposito;
+        console.log("Deposito listo, Saldo actual: ", this[SALDO_INTERNO]);
+        return this[SALDO_INTERNO];
+    }
+
+    async retirar(cantidad) {
+        await validarTransaccion(cantidad);
+
+        if (cantidad > this[SALDO_INTERNO]) {
+            throw new Error("Fondos insuficientes");
+        } else {
+            this[SALDO_INTERNO] -= cantidad
+            console.log("Retiro listo, Saldo actual: ", this[SALDO_INTERNO]);
+            return this[SALDO_INTERNO];
+        }
+    }
+}
+
+const capaSeguridad = {
+    get: function (target, property) {
+        const value = target[property];
+
+        if (property === SALDO_INTERNO) {
+            throw new Error("Acceso denegado");
+        }
+
+        if (typeof value === "function") {
+            return value.bind(target);
+        }
+        return value;
+    },
+    set: function (target, property, value) {
+        if (value < 0) {
+            throw new Error("Valor invalido");
+        }
+        target[property] = value;
+        return true;
+    }
+}
+
+async function menu() {
+    const instanciar = new Banco();
+    const instanciarProtegida = new Proxy(instanciar, capaSeguridad);
+
+
+    try {
+        await instanciarProtegida.depositar(2000)
+        await instanciarProtegida.retirar(8000)
+        await instanciarProtegida.depositar(15000)
+
+    } catch (error) {
+        console.log("Error X: ", error.message);
+    }
+}
+
+menu()
