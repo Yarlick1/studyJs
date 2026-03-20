@@ -60,3 +60,7 @@ Estructuras de control (loops o bucles) se asocian a las estructuras de datos
 Objetos son una colección de propiedades, similares a los mapas a nivel estructura
 
 Se usan las clases cuando vamos a crear multiples objetos con estructura similar y queremos reutilizar codigo
+
+DOM = Document Object Model
+Es una representación en forma de arbol de la web, es la manera en la que tenemos una estructura de todo lo que hay en la web con la posibilidad de acceder a todos los elementos de la web, interactuando el contenido create, read, update, delete...
+Convierte la estructura en objetos y nodos

@@ -450,7 +450,9 @@ async function pruebas() {
 async function validarTransaccion(monto) {
     console.log("Validando Transacción......")
     await (new Promise(resolve => setTimeout(resolve, 1500)));
-
+    if (monto < 0) {
+        throw new Error("Valor invalido");
+    }
     if (monto > 10000) {
         throw new Error("Requiere autorización manual para montos altos");
     } else {
@@ -520,12 +522,17 @@ async function menu() {
 
 
     try {
+        console.log("--- Iniciando ráfaga de transacciones ---");
+
+        // Ejecutamos las 3 operaciones simultáneamente
         await instanciarProtegida.depositar(2000)
-        await instanciarProtegida.retirar(8000)
-        await instanciarProtegida.depositar(15000)
+        await instanciarProtegida.retirar(1000) // Bajé este para que no falle por fondos
+        await instanciarProtegida.depositar(500)
+
+        console.log("Todas las transacciones exitosas.");
 
     } catch (error) {
-        console.log("Error X: ", error.message);
+        console.log("Error en la ráfaga: ", error.message);
     }
 }
 
